@@ -17,13 +17,15 @@ public class Cell : MonoBehaviour
     //Пока указатель мыши находится на объекте, применяем к нему заданный материал
     private void OnMouseOver()
     {
-        if (isBuild == true)
-            GetComponent<Renderer>().material = overMaterial;
-        
-        else
+        if (isBuild == false)
         {
             GetComponent<Renderer>().material = cantBuildMaterial;
+            return;
+
         }
+
+        GetComponent<Renderer>().material = overMaterial;
+
     }
     //Если указатель не на объекте - меняем материал на базовый
     private void OnMouseExit()
