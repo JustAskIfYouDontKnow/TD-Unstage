@@ -25,7 +25,7 @@ public class Gun : MonoBehaviour
         }
         if (rotation)
         {
-            if (targetEnemyTransform != null)//���� ��������� ����
+            if (targetEnemyTransform != null)
             {
                 if (Vector3.Distance(targetEnemyTransform.position, transform.position) < viewRadius)//���� �� � ������� �����
                 {

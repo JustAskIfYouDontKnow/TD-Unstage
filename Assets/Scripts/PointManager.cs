@@ -10,19 +10,20 @@ public class PointManager : MonoBehaviour
 
     void Start()
     {
-        childCount = transform.childCount;//Ищем всех детей на объекте, у которого висит этот скрипт
-        ways = new Transform[childCount];//Объявляем размер массивов
+        childCount = transform.childCount;
+        ways = new Transform[childCount];
         wayIndex = new int[childCount];
 
         for (int i = 0; i < childCount; i++)
         {
-            wayIndex[i] = transform.GetChild(i).GetComponent<Point>().index;//Берем индекс вейпоинта
-            ways[i] = transform.GetChild(wayIndex[i]);//Передаем в наш массив вейпоинтов индекс вейпотинта
+            wayIndex[i] = transform.GetChild(i).GetComponent<Point>().index;
+            ways[i] = transform.GetChild(wayIndex[i]);
         }
 
         if (Draw)
             DrawLine();
     }
+    
     void DrawLine()
     {
         for (int i = 0; i < childCount - 1; i++)

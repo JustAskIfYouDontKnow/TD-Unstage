@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class Point : MonoBehaviour
 {
-    public int index = 0;
+    public int index;
 }

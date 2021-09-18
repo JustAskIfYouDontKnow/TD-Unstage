@@ -46,7 +46,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotation: 1
   enemyFind: 1
-  maxRaidus: 3
+  viewRadius: 10
+  rotationSpeed: 1
 --- !u!1001 &223932915022213490
 PrefabInstance:
   m_ObjectHideFlags: 0

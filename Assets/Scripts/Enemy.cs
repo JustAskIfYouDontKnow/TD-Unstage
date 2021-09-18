@@ -42,7 +42,7 @@ public class Enemy : MonoBehaviour
 
         if (rotation)
         {
-            Vector3 targetRotation = nextPoint.position - transform.position;//��������� ������ ��������
+            Vector3 targetRotation = nextPoint.position - transform.position;//��������� ������ �������� -- Йоу 
             transform.rotation = Quaternion.LookRotation(targetRotation*Time.deltaTime);//������������, ��������� Quaternion
         }
 
