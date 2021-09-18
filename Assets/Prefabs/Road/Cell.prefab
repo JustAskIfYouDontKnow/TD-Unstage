@@ -109,6 +109,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f150d749e6c5f79408105911ee4b9ce8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MainMaterial: {fileID: 0}
-  OverMaterial: {fileID: 0}
-  CanBuild: 0
+  initMaterial: {fileID: 2100000, guid: 4293ffbf2b9c2c34e900b13c8b3fae25, type: 2}
+  overMaterial: {fileID: 2100000, guid: cbb12bc7f387f6c4f9b076f3240079c4, type: 2}
+  isBuildMaterial: 0
+  unavailableMaterial: {fileID: 2100000, guid: 3c10f61d7b7516c4393150ad2cc9e804, type: 2}

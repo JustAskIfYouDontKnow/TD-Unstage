@@ -2,43 +2,43 @@
 using UnityEngine;
 public class Cell : MonoBehaviour
 {
-    public Material MainMaterial;
-    public Material OverMaterial;
-    public bool CanBuild;
-    public Material CantBildMaterial;
+    public Material mainMaterial;
+    public Material overMaterial;
+    public bool isBuild;
+    public Material cantBuildMaterial;
 
-    private Spawner spawner;
+    private Spawner _spawner;
 
     private void Start()
     {
-        spawner = FindObjectOfType<Spawner>(); 
+        _spawner = FindObjectOfType<Spawner>(); 
     }
     
     //Пока указатель мыши находится на объекте, применяем к нему заданный материал
     private void OnMouseOver()
     {
-        if (CanBuild)
-            GetComponent<Renderer>().material = OverMaterial;
+        if (isBuild == true)
+            GetComponent<Renderer>().material = overMaterial;
         
         else
         {
-            GetComponent<Renderer>().material = CantBildMaterial;
+            GetComponent<Renderer>().material = cantBuildMaterial;
         }
     }
     //Если указатель не на объекте - меняем материал на базовый
     private void OnMouseExit()
     {
-        GetComponent<Renderer>().material = MainMaterial;
+        GetComponent<Renderer>().material = mainMaterial;
     }
 
     
     private void OnMouseDown()
     {
-        if(CanBuild)
+        if(isBuild)
         {
-            CanBuild = false;
+            isBuild = false;
             //Костыль для теста
-            spawner.InstantiateObject(spawner.canon[0], transform);
+            _spawner.InstantiateObject(_spawner.canon[0], transform);
         }
     }
 }
