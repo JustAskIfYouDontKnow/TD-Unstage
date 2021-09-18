@@ -4,32 +4,33 @@ using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
 {
-    public List<Enemy> enemyList;
+    public List<Enemy> enemies;
 
     public void recalcEnemy()
     {
-        enemyList.AddRange(FindObjectsOfType<Enemy>());
+        enemies.AddRange(FindObjectsOfType<Enemy>());
     }
 
-    public void AddMeToArray(Enemy _enemy)
+    public void AddMeToArray(Enemy enemy)
     {
-        enemyList.Add(_enemy);
+        enemies.Add(enemy);
     }
 
-    public void DeleteMeToArray(Enemy _enemy)
+    public void DeleteMeToArray(Enemy enemy)
     {
-        enemyList.Remove(_enemy);
+        enemies.Remove(enemy);
     }
 
-    public Transform TakeEnemy(Transform tGun, float radius)
+    public Transform TakeEnemy(Transform gunTransform, float radius)
     {
-        foreach(var obj in enemyList)
+        foreach(var enemy in enemies)
         {
-            if (Vector3.Distance
-            (obj.transform.position, tGun.transform.position) <= radius)
+            if (Vector3.Distance(enemy.transform.position, gunTransform.transform.position) <= radius)
             {
-                return obj.transform;
+                return enemy.transform;
             }
+
+            return null;
         }
         return null;
     }

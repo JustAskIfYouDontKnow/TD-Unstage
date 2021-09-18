@@ -375,7 +375,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc3954ad0b5590a4a8619126f5cfc004, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
   nextPoint: {fileID: 0}
-  walk: 1
-  rotation: 1
+  speed: 2
+  hp: 100
+  isWalk: 1
+  isRotation: 1

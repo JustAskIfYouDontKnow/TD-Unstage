@@ -4,51 +4,52 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    private EnemyManager enemyManager;
-    private PointManager pointManager;
+    private EnemyManager _enemyManager;
+    private PointManager _pointManager;
     public Transform nextPoint;
 
 
     public float speed;
     public float hp = 100f;
 
-    public bool walk;
-    public bool rotation;
-    int wayIndex;
+    public bool isWalk;
+    public bool isRotation;
+    private int _wayIndex;
+    
+    
     private void Start()
     {
-        pointManager = FindObjectOfType<PointManager>();
-        enemyManager = FindObjectOfType<EnemyManager>();
+        _pointManager = FindObjectOfType<PointManager>();
+        _enemyManager = FindObjectOfType<EnemyManager>();
 
-        enemyManager.AddMeToArray(this);
+        _enemyManager.AddMeToArray(this);
     }
 
 
     void FixedUpdate()
     {
+        nextPoint = _pointManager.GetNextPoint(_wayIndex);
 
-        nextPoint = pointManager.GetNextPoint(wayIndex);//����� ��������� �������� PointManager
-
-        if (transform.position == nextPoint.position)//���� ���� ������� == ������� ���������
+        if (transform.position == nextPoint.position)
         {
-           wayIndex++;
-        }//���� ���������
-
-        if (wayIndex == pointManager.childCount)
-        {
-            enemyManager.DeleteMeToArray(this);
-            Destroy(gameObject);
-        }//���� ����� �� ����� - ������
-
-        if (rotation)
-        {
-            Vector3 targetRotation = nextPoint.position - transform.position;//��������� ������ �������� -- Йоу 
-            transform.rotation = Quaternion.LookRotation(targetRotation*Time.deltaTime);//������������, ��������� Quaternion
+           _wayIndex++;
         }
 
-        if (walk)
+        if (_wayIndex == _pointManager.childCount)
         {
-            transform.position = Vector3.MoveTowards(transform.position, nextPoint.position, speed * Time.deltaTime);//���� � ���������
+            _enemyManager.DeleteMeToArray(this);
+            Destroy(gameObject);
+        }
+
+        if (isRotation)
+        {
+            Vector3 targetRotation = nextPoint.position - transform.position;
+            transform.rotation = Quaternion.LookRotation(targetRotation*Time.deltaTime);
+        }
+
+        if (isWalk)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, nextPoint.position, speed * Time.deltaTime);
         }
 
     }
