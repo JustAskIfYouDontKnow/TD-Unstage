@@ -1,46 +1,53 @@
-
 using UnityEngine;
+using UnityEngine.Serialization;
+
 public class Cell : MonoBehaviour
 {
-    public Material mainMaterial;
+    public Material initMaterial;
+    
     public Material overMaterial;
-    public bool isBuild;
-    public Material cantBuildMaterial;
+    
+    public bool isBuildMaterial;
+    public Material unavailableMaterial;
 
     private Spawner _spawner;
 
+
     private void Start()
     {
-        _spawner = FindObjectOfType<Spawner>(); 
+        _spawner = FindObjectOfType<Spawner>();
     }
-    
+
     //Пока указатель мыши находится на объекте, применяем к нему заданный материал
     private void OnMouseOver()
     {
-        if (isBuild == false)
+        if (isBuildMaterial == false)
         {
-            GetComponent<Renderer>().material = cantBuildMaterial;
+            GetComponent<Renderer>().material = unavailableMaterial;
             return;
-
         }
 
         GetComponent<Renderer>().material = overMaterial;
-
     }
+
     //Если указатель не на объекте - меняем материал на базовый
     private void OnMouseExit()
     {
-        GetComponent<Renderer>().material = mainMaterial;
+        GetComponent<Renderer>().material = initMaterial;
     }
 
-    
+
     private void OnMouseDown()
     {
-        if(isBuild)
+        if (isBuildMaterial == false)
         {
-            isBuild = false;
-            //Костыль для теста
-            _spawner.InstantiateObject(_spawner.canon[0], transform);
+            GetComponent<Renderer>().material = unavailableMaterial;
+            return;
         }
+
+        isBuildMaterial = false;
+
+        //Костыль для теста
+        _spawner.InstantiateObject(_spawner.canon[0], transform);
     }
 }
