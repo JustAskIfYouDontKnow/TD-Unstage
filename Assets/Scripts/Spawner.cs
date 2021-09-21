@@ -2,15 +2,10 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
-    public GameObject[] canon;
-    public GameObject[] tower;
-
-    
-    //Метод, который принимает в себя объект и его параметры,
-    //для последующего создания на сцене
-    public void InstantiateObject(GameObject obj, Transform t)
+    public void InstantiateObject(Item item, Transform t)
     {
-        Instantiate(obj, t.position, Quaternion.identity);
+        var prefab = Resources.Load(item.path+item.prefabName);
+        Instantiate(prefab, t.position, Quaternion.identity);
     }
 
 }

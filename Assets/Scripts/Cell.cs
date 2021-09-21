@@ -1,14 +1,16 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.Serialization;
 
-public class Cell : MonoBehaviour
+public class Cell : MonoBehaviour, IPointerClickHandler, IDropHandler
 {
     public Material initMaterial;
     
     public Material overMaterial;
     
-    public bool isBuildMaterial;
     public Material unavailableMaterial;
+    
+    public bool isBuild;
 
     private Spawner _spawner;
 
@@ -19,9 +21,9 @@ public class Cell : MonoBehaviour
     }
 
     //Пока указатель мыши находится на объекте, применяем к нему заданный материал
-    private void OnMouseOver()
+   private void OnMouseOver()
     {
-        if (isBuildMaterial == false)
+        if (!isBuild)
         {
             GetComponent<Renderer>().material = unavailableMaterial;
             return;
@@ -35,19 +37,28 @@ public class Cell : MonoBehaviour
     {
         GetComponent<Renderer>().material = initMaterial;
     }
+   
 
-
-    private void OnMouseDown()
+    public void OnPointerClick(PointerEventData eventData)
     {
-        if (isBuildMaterial == false)
+       
+    }
+
+    public void OnDrop(PointerEventData eventData)
+    {
+        if (!isBuild)
         {
             GetComponent<Renderer>().material = unavailableMaterial;
             return;
         }
-
-        isBuildMaterial = false;
-
-        //Костыль для теста
-        _spawner.InstantiateObject(_spawner.canon[0], transform);
+        
+        if (eventData.pointerDrag != null)
+        {
+            Debug.Log("Drop");
+            var obj = eventData.pointerDrag.GetComponent<Item>();
+            _spawner.InstantiateObject(obj, transform);
+            Destroy(obj.gameObject);
+        }
+        isBuild = false;
     }
 }
